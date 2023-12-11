@@ -15,7 +15,11 @@
 #define __HIP_PLATFORM_HCC__
 #endif
 #include <hip/hip_runtime.h>
-#include <rocfft/rocfft.h>
+#  if __has_include(<rocfft/rocfft.h>)  // ROCm 5.3+
+#    include <rocfft/rocfft.h>
+#  else
+#    include <rocfft.h>
+#  endif
 #include "heffte_backend_vector.h"
 
 #ifdef Heffte_ENABLE_MAGMA

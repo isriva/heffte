@@ -1,0 +1,15 @@
+CEXE_sources += heffte_c.cpp
+CEXE_sources += heffte_reshape3d.cpp
+CEXE_sources += heffte_compute_transform.cpp
+CEXE_sources += heffte_magma_helpers.cpp
+CEXE_sources += heffte_plan_logic.cpp
+
+ifeq ($(USE_HEFFTE_ROCFFT),TRUE)
+  CEXE_sources += heffte_backend_rocm.hip.cpp
+else ifeq ($(USE_HEFFTE_CUFFT),TRUE)
+  CEXE_sources += heffte_backend_cuda.cpp
+endif
+
+VPATH_LOCATIONS += $(HEFFTE_HOME)/src
+VPATH_LOCATIONS += $(HEFFTE_HOME)/include
+INCLUDE_LOCATIONS += $(HEFFTE_HOME)/include
